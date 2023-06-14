@@ -1,6 +1,8 @@
 //This is where I will store all my connections.
 import dotenv from "dotenv";
 import assert from "assert";
+
+
 dotenv.config();
 
 const { PORT, HOST, HOST_URL, SQL_SERVER, SQL_USER, SQL_DB, SQL_PASSWORD } =

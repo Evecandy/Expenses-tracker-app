@@ -1,12 +1,15 @@
-import { getUsers } from "../controllers/ExpenseTrackerController.js";
-import { createUsers } from "../controllers/ExpenseTrackerController.js";
-import { getOneUser } from "../controllers/ExpenseTrackerController.js";
-import { updateUser } from "../controllers/ExpenseTrackerController.js";
-import { deleteUser } from "../controllers/ExpenseTrackerController.js";
+// import { Router } from "express";
+import { getUsers, createUsers, getOneUser, updateUser, deleteUser } from "../controllers/ExpenseTrackerController.js";
+
 
 const ExpenseTrackerRoutes = (app) => {
   app.route("/users").get(getUsers).post(createUsers);
-  app.route("/users/:id").get(getOneUser).put(updateUser).delete(deleteUser);
+  app.route("/users/:Username").get(getOneUser).put(updateUser).delete(deleteUser);
 };
+
+// const ExpenseTrackerRoutes = Router()
+// ExpenseTrackerRoutes.get('', getUsers)
+// ExpenseTrackerRoutes.get('/:Username', getOneUser)
+
 
 export default ExpenseTrackerRoutes;

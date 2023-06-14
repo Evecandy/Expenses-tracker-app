@@ -5,11 +5,18 @@ import ExpenseTrackerRoutes from "./routes/ExpenseTrackerRoutes.js"
 
 const app = express();
 
+//middleware
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+// app.use(bodyParser)
+
 ExpenseTrackerRoutes(app);
 app.get("/", (req, res) => {
   res.send("Hello 😋 nice to meet you. Welcome to my Expense tracker API");
 });
 
-app.listen(8000, () => {
-  console.log(`Server running at ${config.url}`);
+// app.use( '/users',ExpenseTrackerRoutes)
+
+app.listen(config.port, () => {
+  console.log(`Server running at ${config.host}:${config.port}...`);
 });
