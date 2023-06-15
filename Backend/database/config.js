@@ -5,7 +5,7 @@ import assert from "assert";
 
 dotenv.config();
 
-const { PORT, HOST, HOST_URL, SQL_SERVER, SQL_USER, SQL_DB, SQL_PASSWORD } =
+const { PORT, HOST, HOST_URL, SQL_SERVER, SQL_USER, SQL_DB, SQL_PASSWORD, JWT_SECRET } =
   process.env;
 
 const sqlEncrypt = process.env.SQL_ENCRYPT === "true";
