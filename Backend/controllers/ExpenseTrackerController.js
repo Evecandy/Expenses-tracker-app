@@ -45,9 +45,10 @@ export const createUsers = async (req, res) => {
       .request()
       // .input("UserID", sql.Int, UserID)
       .input("Username", sql.VarChar, Username)
+      .input("EmailAddress", sql.VarChar, EmailAddress)
       .input("Password", sql.VarChar, Password)
       .query(
-        "INSERT INTO Users ( Username, Password) VALUES ( @Username, @Password)"
+        "INSERT INTO Users ( Username, EmailAddress, Password) VALUES ( @Username, @EmailAddress, @Password)"
       );
     res.status(200).json({ message: "User created successfully" });
   } catch (error) {
@@ -64,11 +65,13 @@ export const createUsers = async (req, res) => {
 export const updateUser = async (req, res) => {
   try{
       const { Username } = req.params;
+      const {EmailAddress} = req.body;
       const {Password} = req.body;
       let pool = await sql.connect(config.sql);
       const resultset = await pool
         .request()
         .input("Username", sql.VarChar, Username)
+        .input("EmailAddress", sql.VarChar, EmailAddress)
         .input("Password", sql.VarChar, Password)
         .query(
           "UPDATE Users SET Password=@Password WHERE Username=@Username"
