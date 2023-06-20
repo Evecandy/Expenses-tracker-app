@@ -1,5 +1,70 @@
 import sql from "mssql";
 import config from "../database/config.js";
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+export const signinRequired = (req, res, next) => {
+    if (req.user) {
+        next();
+    } else {
+        return res.status(401).json({ message: 'Unauthorized user!' });
+    }
+};
+
+
+export const signup = async (req, res) => {
+    const { Username, Password, EmailAddress } = req.body;
+    const hashedPassword = bcrypt.hashSync(Password, 10);
+    try {
+        let pool = await sql.connect(config.sql);
+        const result = await pool.request()
+            .input('Username', sql.VarChar, Username)
+            .input ('Password', sql.VarChar, Password )
+            .input ('EmailAddress', sql.VarChar,EmailAddress)
+            .query('SELECT * FROM Users WHERE Username = @Username OR EmailAddress = @EmailAddress');
+        const user = result.recordset[0];
+        if (user) {
+            res.status(409).json({ error: 'User already exists' });
+        } else {
+            await pool.request()
+                .input('Username', sql.VarChar, Username)
+                .input('Password', sql.VarChar, hashedPassword)
+                .input('EmailAddress', sql.VarChar, EmailAddress)
+                .query('INSERT INTO Users (Username, Password, EmailAddress) VALUES (@Username, @Password, @EmailAddress)');
+            res.status(200).send({ message: 'User created successfully' });
+        }
+
+    } catch (error) {
+        res.status(500).json( error.message);
+    } finally {
+        sql.close();
+    }
+
+};
+
+export const signin = async (req, res) => {
+    const { Username, Password } = req.body;
+    let pool = await sql.connect(config.sql);
+    const result = await pool.request()
+        .input('Username', sql.VarChar, Username)
+        .input('Password', sql.VarChar, Password)
+        .query('SELECT * FROM Users WHERE Username = @Username');
+    const user = result.recordset[0];
+    if (!user) {
+        res.status(401).json({ error: 'Authentication failed. Wrong cedentials.' });
+    } else {
+        if (!bcrypt.compareSync(Password, user.Password)) {
+            res.status(401).json( error.message);
+        } else {
+            const token = `JWT ${jwt.sign({ username: user.Username}, config.jwt_secret)}`;
+            res.status(200).json({  Username: user.Username, Password: user.Password, token: token });
+        }
+    }
+
+};
+
+
+
 
 //lets get all users
 export const getUsers = async (req, res) => {
@@ -8,7 +73,7 @@ export const getUsers = async (req, res) => {
     const resultSet = await pool.request().query("SELECT * FROM Users");
     res.status(200).json(resultSet.recordsets);
   } catch (error) {
-    res.status(220).json({ error: "an error occurred while retrieving users" });
+    res.status(220).json(error.message);
   } finally {
     sql.close();
   }
@@ -39,7 +104,7 @@ export const getOneUser = async (req, res) => {
 //create a user/ add a user
 export const createUsers = async (req, res) => {
   try {
-    const { Username, Password } = req.body;
+    const { Username, Password, EmailAddress} = req.body;
     let pool = await sql.connect(config.sql);
     await pool
       .request()
