@@ -1,19 +1,19 @@
-// import { useState } from 'react'
+
 import "./landing.page.css";
+import SigninForm from "./SigninForm";
+import SignupForm from "./SignupForm";
+
+
+
 
 function LandingPage() {
+   
   return (
     <>
       <div id="landing-page">
         <header>
           <div id="logo">BudgetFrenzzie</div>
-          <form id="signin-form">
-            <div id="signin-inputs">
-              <input type="text" placeholder="Username" />
-              <input type="password" name="" id="" placeholder="Password" />
-            </div>
-            <input type="submit" value="sign in" />
-          </form>
+          <SigninForm />
         </header>
         <main>
           <div id="catch-phrase">
@@ -25,17 +25,8 @@ function LandingPage() {
               Expense Tracking App
             </p>
           </div>
-          <form id="signup-form">
-            <input type="text" placeholder="Username" />
-            <input type="text" placeholder="Password" />
-            <input
-              type="email"
-              name="email"
-              id=""
-              placeholder="email@example.com"
-            />
-            <input type="submit" value="Sign up" />
-          </form>
+          <SignupForm/>
+          
         </main>
       </div>
     </>
