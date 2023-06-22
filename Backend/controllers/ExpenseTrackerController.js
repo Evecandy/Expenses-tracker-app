@@ -68,7 +68,6 @@ export const signin = async (req, res) => {
         .status(200)
         .json({
           Username: user.Username,
-          Password: user.Password,
           token: token
         });
     }
@@ -98,7 +97,8 @@ export const getOneUser = async (req, res) => {
       // .input('UserId', sql.Int, UserId)
       .input("Username", sql.VarChar, Username)
       .query("SELECT * FROM Users WHERE Username = @Username");
-    res.status(200).json(resultSet.recordset[0]);
+    console.log(resultSet.recordset);
+    res.status(200).json(resultSet);
   } catch (error) {
     res.status(500).json(error.message);
   } finally {

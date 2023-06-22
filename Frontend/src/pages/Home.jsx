@@ -1,36 +1,42 @@
+import { useContext } from "react";
+import { AuthContext } from "../context/userContext/Context";
+import { FaSignOutAlt } from "react-icons/fa";
+import "./Home.css";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
+export default function Home() {
+  const { user, dispatch } = useContext(AuthContext);
+  const username = user ? user.Username : "";
+  const navigate = useNavigate();
+  const handleSignout = () => {
+    dispatch({ type: "Signout" });
+    navigate("");
+  };
 
-// export default function Home() {
-//     return (
-//         <div className="home">
-//         </div>
+  const userInitial = String(user).charAt(0);
 
-//     )
-// }
-
-
-
-import React from 'react';
-import './home.css';
-
-const Home = () => {
   return (
-    <div>
-      <div className="profile-card">
-        <img src="https://avatars.githubusercontent.com/u/12345678?v=4" alt="Profile Picture" />
-        <h2>Your Name</h2>
-      </div>
-      <div className="expense-card">
-        <h3>Expense 1</h3>
-        <p>This is a description of expense 1.</p>
-      </div>
-      <div className="expense-card">
-        <h3>Expense 2</h3>
-        <p>This is a description of expense 2.</p>
-      </div>
-      <button className="add-expense-button">Add Expense</button>
-    </div>
-  );
-};
+    <header>
+      {/* <div className="logo">
+        <img src="https://budgetfrenzie.com/logo.png" alt="BudgetFrenzie" />
+      </div> */}
+      <div className="user-profile">
+        <div className="user-initial">
+          <span>{userInitial}</span>
+        </div>
+        <div className="user-name">{username}</div>
+        <div className="user-options">
+          <a href="#">Settings</a>
 
-export default Home;
+          <Link onClick={handleSignout} style={{ color: "red" }}>
+            <FaSignOutAlt id="icons" /> Signout
+          </Link>
+        </div>
+      </div>
+      <button className="report-button" onClick={() => alert("Report")}>
+        Report
+      </button>
+    </header>
+  );
+}

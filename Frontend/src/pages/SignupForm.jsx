@@ -2,8 +2,10 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupForm() {
+  const navigate = useNavigate();
   const schema = yup.object().shape({
     Username: yup.string().required("Username is required"),
     Password: yup.string().required("Password is required"),
@@ -17,12 +19,13 @@ export default function SignupForm() {
   const onSubmit = (data) => {   
     Axios.post("http://localhost:3000/auth/signup", data)
       .then(response =>{
-        if (response.data) {
+        if (response.data.message) {
           alert(response.data.message)
         }
+        navigate("/home");
       })
-      .catch((error) =>{
-        alert (error.response.data.error);
+      .catch(({response}) =>{
+        alert (response.data.error);
       });
   };
 
