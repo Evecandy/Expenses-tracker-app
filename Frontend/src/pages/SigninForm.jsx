@@ -31,7 +31,7 @@ export default function SigninForm() {
     .then(({data}) =>{
       if (data.token) {
         dispatch({ type:"Signin successful", payload: data})
-        navigate("/home") 
+        navigate("/dashboard") 
       }
     })
     .catch(({ response}) => {

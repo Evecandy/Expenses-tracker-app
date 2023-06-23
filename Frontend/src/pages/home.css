@@ -1,17 +1,8 @@
 
-.logo {
-  width: 100px;
-  height: 100px;
-}
 
-.user-profile {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 .user-initial {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
 }
 
@@ -19,10 +10,7 @@
   font-size: 16px;
 }
 
-.user-options {
-  display: flex;
-  align-items: center;
-}
+
 
 .report-button {
   background-color: #007bff;
@@ -35,3 +23,72 @@
 .report-button:hover {
   text-decoration: underline;
 }
+
+nav{
+      background: #29AAF2;
+      width:100%;
+      padding: 10px 10%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    
+}
+
+.header ul {
+  display: flex;
+  background-color: white;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.header-logo {
+  width: 120px;
+  margin-right: 40px;
+}
+
+
+
+.user-initial{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: rgba(0, 128, 0, 0.483);
+  cursor: pointer;
+  margin-left: 30px;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-initial span{
+  font-size: 20px;
+  color: white;
+  text-transform: uppercase;
+}
+
+.sub-menu{
+  display: flex;
+  align-items: center;
+}
+
+nav ul {
+      width: 80%;
+      text-align: right;
+}
+
+nav ul li {
+      display: inline-block;
+      list-style: none;
+      margin: 10px 20px;
+}
+
+nav ul li a {
+    color: rgb(31, 30, 30);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+

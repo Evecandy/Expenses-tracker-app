@@ -22,7 +22,7 @@ export default function SignupForm() {
         if (response.data.message) {
           alert(response.data.message)
         }
-        navigate("/home");
+        navigate("/dashboard");
       })
       .catch(({response}) =>{
         alert (response.data.error);
