@@ -18,16 +18,17 @@ export const getExpenses = async (req, res) => {
 //create/add an expense
 export const addExpense = async (req, res) => {
     try {
-      const { Username, Date, Amount,CategoryName } = req.body;
+      const {Username} = req.auth
+      const { Amount,CategoryName, Description } = req.body;
       let pool = await sql.connect(config.sql);
       await pool
         .request()
         .input("Username", sql.VarChar, Username)
-        .input("Date", sql.Date, Date)
         .input("Amount", sql.Decimal, Amount)
         .input("CategoryName", sql.VarChar, CategoryName)
+        .input("Description", sql.VarChar, Description)
         .query(
-          "INSERT INTO Expenses ( Username, Date, Amount, CategoryName ) VALUES ( @Username, @Date, @Amount, @CategoryName)"
+          "INSERT INTO Expenses ( Username,Amount, CategoryName, Description ) VALUES ( @Username, @Amount, @CategoryName, @Description)"
         );
       res.status(200).json({ message: "expense added successfully" });
     } catch (error) {
@@ -62,17 +63,16 @@ export const addExpense = async (req, res) => {
 
   export const updateExpense = async (req, res) => {
     try{
-        const { Username } = req.params;
-        const {EmailAddress} = req.body;
-        const {Password} = req.body;
+        // const { Username } = req.params; don't
+        const {Amount, CategoryName, Description,ExpenseID} = req.body;
         let pool = await sql.connect(config.sql);
         const resultset = await pool
           .request()
           .input("Username", sql.VarChar, Username)
-          .input("EmailAddress", sql.VarChar, EmailAddress)
-          .input("Password", sql.VarChar, Password)
+          .input("Amount", sql.VarChar, Amount)
+          .input("CategoryName", sql.VarChar, CategoryName)
           .query(
-            "UPDATE Users SET Password=@Password WHERE Username=@Username"
+            "UPDATE Expenses SET Amount=@Amount, CategoryName=@CategoryName WHERE CategoryName=@CategoryName"
           );
           res.status(200).json({message:"User password was updated successfully"});
     } catch (error) {

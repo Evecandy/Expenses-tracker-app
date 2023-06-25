@@ -2,10 +2,10 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LandingPage from './pages/landing.page'
-import Home from './pages/Home';
 import { useContext} from 'react';
 import {AuthContext} from './context/userContext/Context';
 import NotFound from './pages/NotFound';
+import Dashboard from './pages/Dashboard';
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage/>}/>
-          <Route path="/dashboard" element={ user ? <Home/> : <LandingPage/>} />
+          <Route path="/dashboard" element={ user ? <Dashboard/> : <LandingPage/>} />
           {/* <Route path="/home-main" element={<Home/>} /> */}
           <Route path="*" element={<NotFound />} />
         </Routes>

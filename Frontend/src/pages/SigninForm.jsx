@@ -48,7 +48,7 @@ export default function SigninForm() {
       <input
         type="password"
         {...register("Password")}
-        placeholder="Password ..."
+        placeholder="Password"
       />
       <p>{errors.Password?.message}</p>
     </div>

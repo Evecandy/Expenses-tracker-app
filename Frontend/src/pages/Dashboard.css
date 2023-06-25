@@ -25,7 +25,8 @@
 }
 
 nav{
-      background: #29AAF2;
+      background: rgb(13,221,255);
+      background: linear-gradient(137deg, rgba(13,221,255,1) 0%, rgba(49,157,239,1) 44%, rgba(49,157,239,1) 84%);
       width:100%;
       padding: 10px 10%;
       display: flex;
@@ -50,13 +51,11 @@ nav{
 
 
 .user-initial{
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background-color: rgba(0, 128, 0, 0.483);
+  background-color: #FCE7C6;
   cursor: pointer;
-  margin-left: 30px;
-  margin-right: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,15 +63,43 @@ nav{
 
 .user-initial span{
   font-size: 20px;
-  color: white;
+  color: black;
   text-transform: uppercase;
 }
 
 .sub-menu{
   display: flex;
   align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+.drop-down {
+  display: flex;
+  position: absolute;
+  top: 100%;
+  background-color: #DEFCF7;
+  gap: 1.5rem;
+  flex-direction: column;
+  
 }
 
+.sub-menu-link {
+  text-decoration: none;
+  color: black;
+}
+#signout{
+  color: grey;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+#profile-icon {
+    display: flex;
+    align-items: center;
+}
+nav {
+  gap:1rem;
+}
 nav ul {
       width: 80%;
       text-align: right;

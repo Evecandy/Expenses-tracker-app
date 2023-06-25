@@ -83,16 +83,16 @@ p {
 #signin-form input[type=submit] {
     padding: 0.5rem 1rem;
     flex-shrink: 1;
-    background-color: rgba(245, 245, 220, 0.932);
+    background-color: #FFB74D;
 }
 
 #signup-form {
     flex-direction: column;
     width: min(90svw,400px);
-    background-color: #f5f5f5ce;
+    background-color: #FCE7C6;
     padding: 1rem;
     border-radius: 0.5rem;
-    gap: 1rem;
+    /* gap: 1rem; */
 }
 
 input {
@@ -104,6 +104,6 @@ input {
 }
 
 #signup-form input[type=submit] {
-    background-color: rgba(245, 245, 220, 0.737);
+    background-color: #FFB74D;
     font-size: medium;
 }

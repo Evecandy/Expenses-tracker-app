@@ -34,12 +34,12 @@ export default function SignupForm() {
       <form id="signup-form" onSubmit={handleSubmit(onSubmit)}>
         <input type="text" {...register("Username")} placeholder="Username" />
         <p>{errors.Username?.message}</p>
-        <input type="text" {...register("Password")} placeholder="Password" />
-        <p>{errors.Password?.message}</p>
         <input  type="email" {...register("EmailAddress")}
           placeholder="email@example.com"
         />
         <p>{errors.EmailAddress?.message}</p>
+        <input type="password" {...register("Password")} placeholder="Password" />
+        <p>{errors.Password?.message}</p>
         <input type="submit" value="Sign up" />
       </form>
     </div>

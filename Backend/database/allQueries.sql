@@ -1,23 +1,50 @@
 CREATE DATABASE ExpensesTracking;
 USE ExpensesTracking;
 
-CREATE TABLE PaymentMethods (
-  PaymentMethodID INT IDENTITY (200,1) PRIMARY KEY,
-  PaymentMethodName VARCHAR(50),
-  Description VARCHAR(255)
+
+CREATE TABLE Expenses (
+  ExpenseID INT IDENTITY (100,1) PRIMARY KEY,  
+  Username VARCHAR(50),
+  DateOfExpense datetimeoffset DEFAULT SYSDATETIMEOFFSET(),
+  Amount DECIMAL(10, 2),
+  CategoryName VARCHAR(50),
+  Description VARCHAR(140),
+  FOREIGN KEY (Username) REFERENCES Users(Username),
+  FOREIGN KEY (CategoryName) REFERENCES Categories(CategoryName)
 );
 
-DROP TABLE PaymentMethods;
+INSERT INTO Expenses (Username, Amount, CategoryName, Description)
+VALUES
+  
+  ('johnsmith',350, 'Food','Bought twelve oranges' ),
+  ('mikejones' ,450,'Bills','Paid the water bill for this month'  ), 
+  ('janedoll',650,'Rent', 'Paid this month rent' );
+  SELECT * FROM Expenses;
 
+DROP TABLE Expenses;
+
+CREATE TABLE Categories (
+  CategoryName VARCHAR(50) PRIMARY KEY
+  
+);
+
+INSERT INTO Categories (CategoryName)
+VALUES
+	('Food'),
+	('Rent'),
+	('Bills');
+
+DROP TABLE Categories;
+
+SELECT * FROM Categories;
 
 CREATE TABLE Users (
   UserID INT IDENTITY (1,1),
   Username VARCHAR(50) PRIMARY KEY,
   EmailAddress VARCHAR(100),
-  Password VARCHAR(8)
+  Password VARCHAR(300)
 );
 
-  DROP TABLE Users; 
 
 INSERT INTO Users (Username,EmailAddress, Password)
 VALUES
@@ -25,26 +52,17 @@ VALUES
   ( 'janedoll','janedoll@gmail.com', 'pass456'),
   ( 'mikejones','mikejones@gmail.com', 'abc123');
 
-SELECT * FROM Users;
+   DROP TABLE Users;        
 
-CREATE TABLE Categories (
-  CategoryName VARCHAR(50) PRIMARY KEY,
+   SELECT * FROM Users;
+
+CREATE TABLE PaymentMethods (
+  PaymentMethodID INT IDENTITY (200,1) PRIMARY KEY,
+  PaymentMethodName VARCHAR(50),
   Description VARCHAR(255)
 );
 
-DROP TABLE Categories;
-
-CREATE TABLE Expenses (
-  ExpenseID INT IDENTITY (100,1) PRIMARY KEY,  
-  Username VARCHAR(50),
-  Date DATE,
-  Amount DECIMAL(10, 2),
-  CategoryName VARCHAR(50),
-  FOREIGN KEY (Username) REFERENCES Users(Username),
-  FOREIGN KEY (CategoryName) REFERENCES Categories(CategoryName)
-);
-
-DROP TABLE Expenses;
+DROP TABLE PaymentMethods;
 
 CREATE TABLE ExpenseCategories (
   ExpenseID INT,

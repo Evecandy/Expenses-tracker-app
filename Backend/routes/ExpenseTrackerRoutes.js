@@ -1,22 +1,10 @@
 // import { Router } from "express";
-import {
-  getUsers,
-  createUsers,
-  getOneUser,
-  updateUser,
-  deleteUser,
-} from "../controllers/ExpenseTrackerController.js";
+import {getUsers, createUsers, getOneUser, updateUser, deleteUser} from "../controllers/user.controller.js";
 import { validateCreateUserData } from "../customMiddlewares/user.validations.js";
-import {
-  signinRequired,
-  signup,
-  signin,
-} from "../controllers/ExpenseTrackerController.js";
-import {
-  addExpense,
-  deleteExpense,
-  updateExpense,
-} from '../controllers/Expenses.controller.js';
+import { signinRequired, signup, signin} from "../controllers/user.controller.js";
+import {addExpense, deleteExpense, updateExpense,} from '../controllers/expenses.controller.js';
+import { verifyUser } from "../customMiddlewares/auth.js";
+import { getCategories } from "../controllers/categories.controller.js";
 
 const ExpenseTrackerRoutes = (app) => {
   app.route('/users').get(getUsers).post(validateCreateUserData, createUsers);
@@ -30,9 +18,9 @@ const ExpenseTrackerRoutes = (app) => {
 
   app
     .route('/expenses')
-    .post(signin, addExpense);
+    .post(verifyUser, addExpense);
   app
-    .route ('/expenses/:CategoryName')
+    .route ('/expenses/:ExpenseID')
     .delete(signinRequired, deleteExpense)
     .put(signinRequired, updateExpense);
 
@@ -40,7 +28,12 @@ const ExpenseTrackerRoutes = (app) => {
   app.route('/auth/signup').post(signup);
 
   app.route('/auth/signin').post(signin);
+
+  app
+    .route('/categories')
+    .get(getCategories);
 };
+
 
 // const ExpenseTrackerRoutes = Router()
 // ExpenseTrackerRoutes.get('',accountRequired, getUsers)

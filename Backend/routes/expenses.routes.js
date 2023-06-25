@@ -2,8 +2,8 @@ import { createExpense, getOneExpense, getExpenses,  deleteExpense, updateExpens
 
 
 const expensesRoutes = (app) => {
-    app.route("/users").get(getExpenses).post(validateExpensesData, createExpense);
-    app.route("/users/:Username").get(getOneExpense).put(updateExpense).delete(deleteExpense);
+    app.route("/expenses").get(getExpenses).post(validateExpensesData, createExpense);
+    app.route("/expenses").get(getOneExpense).put(updateExpense).delete(deleteExpense);
   };
 
   export default expensesRoutes;
