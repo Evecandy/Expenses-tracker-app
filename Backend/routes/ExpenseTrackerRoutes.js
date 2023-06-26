@@ -2,7 +2,7 @@
 import {getUsers, createUsers, getOneUser, updateUser, deleteUser} from "../controllers/user.controller.js";
 import { validateCreateUserData } from "../customMiddlewares/user.validations.js";
 import { signinRequired, signup, signin} from "../controllers/user.controller.js";
-import {addExpense, deleteExpense, updateExpense,} from '../controllers/expenses.controller.js';
+import {addExpense, deleteExpense, updateExpense,getExpenses} from '../controllers/expenses.controller.js';
 import { verifyUser } from "../customMiddlewares/auth.js";
 import { getCategories } from "../controllers/categories.controller.js";
 
@@ -18,7 +18,8 @@ const ExpenseTrackerRoutes = (app) => {
 
   app
     .route('/expenses')
-    .post(verifyUser, addExpense);
+    .post(signinRequired,addExpense)
+    .get( getExpenses);
   app
     .route ('/expenses/:ExpenseID')
     .delete(signinRequired, deleteExpense)
@@ -31,7 +32,7 @@ const ExpenseTrackerRoutes = (app) => {
 
   app
     .route('/categories')
-    .get(getCategories);
+    .get(signinRequired, getCategories);
 };
 
 

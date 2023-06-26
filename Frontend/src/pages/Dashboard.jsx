@@ -21,7 +21,7 @@ export default function Dashboard() {
   };
 
   const userInitial = String(user.Username).charAt(0);
-  console.log(user, userInitial)
+  // console.log(user, userInitial)
 
   return (
     <>

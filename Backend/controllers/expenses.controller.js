@@ -18,8 +18,7 @@ export const getExpenses = async (req, res) => {
 //create/add an expense
 export const addExpense = async (req, res) => {
     try {
-      const {Username} = req.auth
-      const { Amount,CategoryName, Description } = req.body;
+      const { Username, Amount,CategoryName, Description } = req.body;
       let pool = await sql.connect(config.sql);
       await pool
         .request()
@@ -32,11 +31,12 @@ export const addExpense = async (req, res) => {
         );
       res.status(200).json({ message: "expense added successfully" });
     } catch (error) {
+      console.log(error.message);
       res
         .status(500)
         .json( error.message);
     } finally {
-      sql.close();
+      // sql.close();
     }
     
   };
