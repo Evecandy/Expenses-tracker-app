@@ -26,15 +26,15 @@ export default function AddExpense() {
 
   const schema = yup.object().shape({
     Username: yup.string().required("Username is required"),
-    Amount: yup.number().required("Amount is required"),
-    // CategoryName:yup.string().required("Category is required"),
+    Amount: yup.number("Amount must be a number").required("Amount is required"),
+    CategoryName:yup.string().required("Category is required"),
     Description: yup.string().required("description is required"),
   });
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors },reset
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
@@ -43,19 +43,27 @@ export default function AddExpense() {
     })
       .then((response) => {
         response.data.message && alert(response.data.message);
-        // reset();
+        reset();
       })
       .catch(({ response }) => {
         if (response && response.data && response.data.error) {
           alert(response.data.error);
+          
         } else {
           alert("An error occurred. Please try again.");
         }
       });
   };
 
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const handleClick = () => {
+    setIsFormOpen(!isFormOpen);
+};
+
   return (
-    <div>
+    <div className="dashboard-container">
+         <button onClick={handleClick} style={{width: "20vw", height: "5vh",borderRadius: ".5rem",outline: "none", border: "1px solid brown",background: "transparent"}}>+ Add Expense</button>
+      {isFormOpen && (
       <form id="add-expense-form" onSubmit={handleSubmit(onSubmit)}>
         <input type="text" {...register("Username")} placeholder="Username" />
         <p>{errors.Username?.message}</p>
@@ -82,8 +90,9 @@ export default function AddExpense() {
           placeholder="Description"
         />
         <p>{errors.Description?.message}</p>
-        <input className="submitBtn" type="submit" value="+ add expense" />
-      </form>
+        <input className="submitBtn" type="submit" value="save" />
+      </form>)
+}
     </div>
   );
 }

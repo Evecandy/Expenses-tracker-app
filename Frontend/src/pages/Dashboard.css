@@ -99,10 +99,13 @@ nav{
 }
 nav {
   gap:1rem;
+  /* background: transparent; */
 }
 nav ul {
       width: 80%;
       text-align: right;
+      /* background: transparent; */
+      
 }
 
 nav ul li {
@@ -117,5 +120,47 @@ nav ul li a {
     font-weight: 600;
 }
 
+#add-expense-form >p {
+  color: black;
+}
+.dashboard-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 3.5rem;
+  padding: 50px;
+  gap: 2rem;
+  width: 350px;
+  box-shadow: 0 7px 9px 0 rgba(0,0, 0, .5);
+  backdrop-filter: blur(20px);
+}
 
+select {
+  width: 100%;
+  outline: none;
+  border: none;
+  height: 2rem;
+  
+}
 
+.submitBtn {
+  width: 100%;
+  background: rgb(13,221,255);
+  background: linear-gradient(137deg, rgba(13,221,255,1) 0%, rgba(49,157,239,1) 44%, rgba(49,157,239,1) 84%);
+  border-radius: 0.8rem;
+  cursor: pointer;
+}
+.submitBtn:hover{
+  color: green;
+  background: #FFB74D;
+}
+
+#add-expense-form > input {
+  width: 100%;
+  margin: .7rem;
+  height: 2rem;
+  border-radius: .5rem;
+  /* background: transparent; */
+
+}
