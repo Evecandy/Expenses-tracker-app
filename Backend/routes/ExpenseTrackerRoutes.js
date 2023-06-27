@@ -1,7 +1,7 @@
 // import { Router } from "express";
 import {getUsers, createUsers, getOneUser, updateUser, deleteUser} from "../controllers/user.controller.js";
 import { validateCreateUserData } from "../customMiddlewares/user.validations.js";
-import { signinRequired, signup, signin} from "../controllers/user.controller.js";
+import { signup, signin} from "../controllers/user.controller.js";
 import {addExpense, deleteExpense, updateExpense,getExpenses} from '../controllers/expenses.controller.js';
 import { verifyUser } from "../customMiddlewares/auth.js";
 import { getCategories } from "../controllers/categories.controller.js";
@@ -18,12 +18,12 @@ const ExpenseTrackerRoutes = (app) => {
 
   app
     .route('/expenses')
-    .post(signinRequired,addExpense)
+    .post(verifyUser,addExpense)
     .get( verifyUser, getExpenses);
   app
     .route ('/expenses/:ExpenseID')
-    .delete(signinRequired, deleteExpense)
-    .put(signinRequired, updateExpense);
+    .delete(verifyUser, deleteExpense)
+    .put(verifyUser, updateExpense);
 
   //auth routes
   app.route('/auth/signup').post(signup);
@@ -32,7 +32,7 @@ const ExpenseTrackerRoutes = (app) => {
 
   app
     .route('/categories')
-    .get(signinRequired, getCategories);
+    .get(verifyUser, getCategories);
 };
 
 

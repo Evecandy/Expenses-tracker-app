@@ -3,13 +3,13 @@ import config from "../database/config.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const signinRequired = (req, res, next) => {
-  if (req.user) {
-    next();
-  } else {
-    return res.status(401).json({ message: "Unauthorized user!" });
-  }
-};
+// export const signinRequired = (req, res, next) => {
+//   if (req.user) {
+//     next();
+//   } else {
+//     return res.status(401).json({ message: "Unauthorized user!" });
+//   }
+// };
 
 export const signup = async (req, res) => {
   const { Username, Password, EmailAddress } = req.body;

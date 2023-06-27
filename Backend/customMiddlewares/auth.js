@@ -7,20 +7,18 @@ export const verifyUser = (req,res,next)=> {
     try {
         const token = req.headers['token']
         if (!token) {
-            return res.status(401).json({message:'Unauthorized'})
+            return res.status(403).json({message:'Forbidden'})
+            // return res.status(401).json({message:'Unauthorized'})
         }
         req.auth = jwt.verify(token,process.env.JWT_SECRET)
         
         next()
     } catch (error) {
-        return res.status(403).json({message:'Forbidden'})
+        res.json(error)
     }
 
+
 }
 
-const salute = () => {
-  return 'hello world'
-}
 
-let salutation = salute() 
 

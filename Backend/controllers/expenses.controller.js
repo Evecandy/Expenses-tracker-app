@@ -7,6 +7,7 @@ import config from "../database/config.js";
 export const getExpenses = async (req, res) => {
     
   try {
+    console.log(req.auth);
     const {Username} = req.auth
     let pool = await sql.connect(config.sql);
     console.log(Username);

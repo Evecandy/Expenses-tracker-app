@@ -10,16 +10,19 @@ import { AuthContext } from "../context/userContext/Context";
 export default function AddExpense() {
   const { user } = useContext(AuthContext);
   const [categories, setCategories] = useState([]);
-
   const fetchCategories = async () => {
     if (!user) return;
-    const response = await Axios.get("http://localhost:3000/categories", {
-      headers: {
-        Authorization: `${user.token}`,
-      },
-    });
-    setCategories(response.data);
+    const res = await fetch(`http://localhost:3000/categories`, {
+        method: "GET",
+        headers: {
+          "token": `${user.token}`,
+        },
+      });
+      const data = await res.json();
+     
+    setCategories(data);
   };
+
   useEffect(() => {
     fetchCategories();
   });
@@ -39,7 +42,7 @@ export default function AddExpense() {
 
   const onSubmit = (data) => {
     Axios.post("http://localhost:3000/expenses", data, {
-      headers: { Authorization: `${user.token}` },
+      headers: { token: `${user.token}` },
     })
       .then((response) => {
         response.data.message && alert(response.data.message);
@@ -50,7 +53,8 @@ export default function AddExpense() {
           alert(response.data.error);
           
         } else {
-          alert("An error occurred. Please try again.");
+          
+          console.log(response);
         }
       });
   };
@@ -59,6 +63,8 @@ export default function AddExpense() {
   const handleClick = () => {
     setIsFormOpen(!isFormOpen);
 };
+
+
 
   return (
     <div className="dashboard-container">
@@ -96,3 +102,7 @@ export default function AddExpense() {
     </div>
   );
 }
+  
+
+  
+  
