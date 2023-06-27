@@ -60,13 +60,12 @@ export const signin = async (req, res) => {
     if (!bcrypt.compareSync(Password, user.Password)) {
       res.status(401).json({error:'signin not successful'});
     } else {
-      const token = `JWT ${jwt.sign(
-        { username: user.Username },
+      const token = jwt.sign(
+        { Username: user.Username },
         config.jwt_secret
-      )}`;
-      res
-        .status(200)
-        .json({
+      );
+      res.status(200).json(
+        {
           Username: user.Username,
           token: token
         });
@@ -79,7 +78,7 @@ export const getUsers = async (req, res) => {
   try {
     let pool = await sql.connect(config.sql);
     const resultSet = await pool.request().query("SELECT * FROM Users");
-    res.status(200).json(resultSet.recordsets);
+    res.status(200).json(resultSet.recordset);
   } catch (error) {
     res.status(220).json(error.message);
   } finally {

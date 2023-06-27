@@ -5,16 +5,25 @@ import config from "../database/config.js";
 //get all expenses
 
 export const getExpenses = async (req, res) => {
+    
   try {
+    const {Username} = req.auth
     let pool = await sql.connect(config.sql);
-    const resultSet = await pool.request().query("SELECT * FROM Expenses");
-    res.status(200).json(resultSet.recordsets);
+    console.log(Username);
+    const resultSet = await pool.request()
+    .input ("Username", sql.VarChar, Username)
+    .query("SELECT * FROM Expenses WHERE Username=@Username"
+     );
+    res.status(200).json(resultSet.recordset);
   } catch (error) {
-    res.status(220).json(error.message);
+    res.status(500).json(error.message);
   } finally {
-    sql.close();
+    // sql.close();
   }
 };
+
+
+
 //create/add an expense
 export const addExpense = async (req, res) => {
     try {

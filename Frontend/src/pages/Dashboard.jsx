@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import AddExpense from "./AddExpenseForm";
 // import { Context } from "..context/expenseContext/Context";
+import ExpenseList from "../components/ExpenseList";
+
 
 export default function Dashboard() {
   
@@ -67,6 +69,8 @@ export default function Dashboard() {
       </nav>
     </div>
     <AddExpense user={user} />
+
+    <ExpenseList/>
     </>
     
     

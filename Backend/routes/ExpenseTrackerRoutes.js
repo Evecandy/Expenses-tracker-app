@@ -19,7 +19,7 @@ const ExpenseTrackerRoutes = (app) => {
   app
     .route('/expenses')
     .post(signinRequired,addExpense)
-    .get( getExpenses);
+    .get( verifyUser, getExpenses);
   app
     .route ('/expenses/:ExpenseID')
     .delete(signinRequired, deleteExpense)
