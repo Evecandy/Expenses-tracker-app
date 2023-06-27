@@ -29,12 +29,13 @@ const ExpenseList = () => {
   return (
     <div>
       <h1>My expenses</h1>
-      <ul>
+    
+      <ul id="expenses">
         {expenses.map((expense,index) => (
           <ExpenseCard key={expense.ExpenseID}
             CategoryName={expense.CategoryName}
             Amount={expense.Amount}
-            DateOfExpense={new Date(`${expense.DateOfExpense}`).toUTCString()}
+            DateOfExpense={new Date(`${expense.DateOfExpense}`).toLocaleString()}
             Description={expense.Description}
           />
         ))}
