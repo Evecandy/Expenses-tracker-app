@@ -22,7 +22,7 @@ const ExpenseTrackerRoutes = (app) => {
     .get( verifyUser, getExpenses);
   app
     .route ('/expenses/:ExpenseID')
-    .delete(verifyUser, deleteExpense)
+    .delete(verifyUser,deleteExpense)
     .put(verifyUser, updateExpense);
 
   //auth routes

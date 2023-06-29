@@ -54,18 +54,22 @@ export const addExpense = async (req, res) => {
 
   //delete an expense
   export const deleteExpense = async (req, res) => {
+    // console.log('deleted succesfully');
+    // res.status(204).json({message:"deleted"})
     try {
-      const { Date } = req.params;
+      const { ExpenseID } = req.params;
       let pool = await sql.connect(config.sql);
   
-      await sql.query`DELETE FROM Expenses WHERE Date = ${Date}`;
+      await pool .request()
+      .input("ExpenseID", sql.Int, ExpenseID)
+      .query`DELETE FROM Expenses WHERE ExpenseID = @ExpenseID`;
       res.status(200).json({ message: "deleted successfully" });
     } catch (error) {
       res
         .status(500)
         .json( error.message);
     } finally {
-      sql.close();
+      // sql.close();
     }
   };
 
@@ -73,24 +77,26 @@ export const addExpense = async (req, res) => {
 
   export const updateExpense = async (req, res) => {
     try{
-        // const { Username } = req.params; don't
-        const {Amount, CategoryName, Description,ExpenseID} = req.body;
+        const {ExpenseID} = req.params
+        const {Amount, CategoryName, Description} = req.body;
+        console.log(req.body);
         let pool = await sql.connect(config.sql);
         const resultset = await pool
           .request()
-          .input("Username", sql.VarChar, Username)
-          .input("Amount", sql.VarChar, Amount)
+          .input("ExpenseID", sql.Int, ExpenseID)
+          .input("Amount", sql.Decimal, Amount)
           .input("CategoryName", sql.VarChar, CategoryName)
+          .input("Description", sql.VarChar, Description)
           .query(
-            "UPDATE Expenses SET Amount=@Amount, CategoryName=@CategoryName WHERE CategoryName=@CategoryName"
+            "UPDATE Expenses SET Amount=@Amount, CategoryName=@CategoryName, Description=@Description WHERE ExpenseID=@ExpenseID"
           );
-          res.status(200).json({message:"User password was updated successfully"});
+          res.status(200).json({message:"Expense was updated successfully"});
     } catch (error) {
       
         res.status(400).json(error.message)
         
     }  finally {
-      sql.close();
+      // sql.close();
     }
    
   };

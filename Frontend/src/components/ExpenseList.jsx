@@ -1,6 +1,5 @@
 import ExpenseCard from "./Card";
 import { useContext } from "react";
-import Axios from "axios";
 import { AuthContext } from "../context/userContext/Context";
 import { useEffect, useState } from "react";
 
@@ -32,7 +31,7 @@ const ExpenseList = () => {
     
       <ul id="expenses">
         {expenses.map((expense,index) => (
-          <ExpenseCard key={expense.ExpenseID}
+          <ExpenseCard ExpenseID={expense.ExpenseID}
             CategoryName={expense.CategoryName}
             Amount={expense.Amount}
             DateOfExpense={new Date(`${expense.DateOfExpense}`).toLocaleString()}
@@ -42,6 +41,7 @@ const ExpenseList = () => {
       </ul>
     </div>
   );
-};
-
+        
+        }
+   
 export default ExpenseList;
