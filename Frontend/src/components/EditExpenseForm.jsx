@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../context/userContext/Context';
 import Axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import './EditExpenseForm.css'
 
 const EditExpenseForm = () => {
     const {id }= useParams()
@@ -63,10 +63,11 @@ const [ setCategories] = useState([]);
   };
 
   return (
-    <div>
+    <div className='edit-expenses-container'>
       <h2>Edit Expense</h2>
+      
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className='edit-expenses-form'>
           <label htmlFor="amount">Amount:</label>
           <input
             type="number"

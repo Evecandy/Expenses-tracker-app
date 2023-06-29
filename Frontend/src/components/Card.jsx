@@ -59,14 +59,16 @@ const ExpenseCard = ({
       <p>Amount: {Amount}</p>
       <p>Date: {DateOfExpense}</p>
       <p>Description: {Description}</p>
-
+<div className="expense-btns">
       <button className="edit-button" onClick={()=>handleEditClick(ExpenseID)}>
         <FaEdit />
       </button>
-
+   
+      
       <button className="delete-button" onClick={handleDeleteClick}>
         <FaTrashAlt />
       </button>
+      </div>
     </div>
   );
 };

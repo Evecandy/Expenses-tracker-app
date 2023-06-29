@@ -30,7 +30,7 @@ export default function Dashboard() {
     <div className="header">
       <nav>
         <div className="header-logo">BudgetFrenziee</div>
-        <ul>
+        <ul className="header_ul">
           <li>
             <a href="#">Expenses</a>
           </li>

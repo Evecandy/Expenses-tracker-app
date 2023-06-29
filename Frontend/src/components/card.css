@@ -1,19 +1,36 @@
 
 .expenses > p{
-    color: red;
+    color: rgb(0, 195, 255);
 }
 
 .expenses {
     padding: 2rem;
-    box-shadow:0 7px 30px -10px rgba(150,170,180,0.5);
+    box-shadow:0 7px 10px 5px rgba(0,0,0,0.5);
     background-color: white;
     border-radius: 10px;
+    transition: transform .5s;
+}
+.expenses:hover{
+    transform: scale(1,05s);
 }
 
 .edit-button {
-    background-color: #007bff;
-    color: white;
+    background-color: transparent;
+    color: rgb(14, 78, 216);
     border: none;
     padding: 10px 20px;
     cursor: pointer;
   }
+
+  .expense-btns {
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  .delete-button {
+    background: transparent;
+    border: none;
+    color: red;
+  }
+

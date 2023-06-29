@@ -1,0 +1,46 @@
+.edit-expenses-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+form > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+label{
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+input{
+    outline: none;
+    padding: 7px;
+    border-bottom: 1px solid black;
+}
+textarea{
+   /* outline: none; */
+   border: none;
+   resize: none;
+
+}
+
+
+form > button {
+    margin-left: 50px;
+    padding: 1rem;
+    background:#007bff;
+    border: none;
+    border-radius: 1rem;
+    width: 50vw;
+    font-weight: 600;
+    font-size: 1rem;
+
+}
